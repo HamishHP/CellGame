@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;using UnityEngine.InputSystem.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 [RequireComponent(typeof(EventSystem))]
 [RequireComponent(typeof(InputSystemUIInputModule))]
 [RequireComponent(typeof(PlayerInput))]
-
 public class InputManager : Singleton<InputManager>
 {
     private PlayerInput playerInput;
@@ -17,7 +17,9 @@ public class InputManager : Singleton<InputManager>
     [SerializeField] private Vector3 moveDelta;
 
     public static event Action OnPrimaryUpdated;
+
     public static event Action<Vector2> OnLookUpdated;
+
     public static event Action<Vector2> OnMoveUpdated;
 
     protected override void Awake()
@@ -27,7 +29,7 @@ public class InputManager : Singleton<InputManager>
         {
             playerInput = GetComponent<PlayerInput>();
         }
-        
+
         if (!playerInput.camera)
         {
             playerInput.camera = Camera.main;
@@ -46,7 +48,6 @@ public class InputManager : Singleton<InputManager>
         Vector2 pos = context.ReadValue<Vector2>();
         lookDelta = pos;
         OnLookUpdated?.Invoke(lookDelta);
-
     }
 
     public void OnPrimary(InputAction.CallbackContext context)
@@ -62,5 +63,8 @@ public class InputManager : Singleton<InputManager>
         pointerPositionScreenSpace = pos;
     }
 
-
+    public Vector2 GetPointerPos()
+    {
+        return pointerPositionScreenSpace;
+    }
 }
