@@ -3,8 +3,7 @@ using UnityEngine;
 public class PlayerCircleController : MonoBehaviour
 {
     public Camera cam;
-
-    private bool isShooting = false;
+    public ShootScript shootScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -15,6 +14,16 @@ public class PlayerCircleController : MonoBehaviour
     private void Update()
     {
         FaceCursor();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            shootScript.StartShooting();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            shootScript.StopShooting();
+        }
     }
 
     private Vector3 GetMousePos()
@@ -22,16 +31,6 @@ public class PlayerCircleController : MonoBehaviour
         Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = transform.position.z;
         return mousePos;
-    }
-
-    private void OnMouseDown()
-    {
-        isShooting = true;
-    }
-
-    private void OnMouseUp()
-    {
-        isShooting = false;
     }
 
     private Vector3 GetMouseDirection()
@@ -45,7 +44,7 @@ public class PlayerCircleController : MonoBehaviour
     {
         Vector3 direction = GetMouseDirection();
 
-        // Calculate the angle in degrees between the direction vector and the up vector (top of the character)
+        // Calculate the angle in degrees between the direction vector and the right vector (being the x vector)
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         // Rotate the character to face the mouse pointer
