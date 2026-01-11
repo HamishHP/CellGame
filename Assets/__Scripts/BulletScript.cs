@@ -20,8 +20,15 @@ public class BulletScript : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
+            collision.GetComponent<EnemyScript>().Die();
         }
+
+        if (collision.CompareTag("Player"))
+        {
+            collision.GetComponent<PlayerCircleController>().TakeDamage();
+        }
+
+        Destroy(gameObject);
     }
 
     public void SetBulletSpeed(float speed)

@@ -6,25 +6,28 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemySpawned;
     public Transform[] spawnPoints;
 
-    float time;
+    private float time;
 
+    public Transform playerPos;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         time += Time.deltaTime;
 
-        if(time > spawnRate)
+        if (time > spawnRate)
         {
             SpawnEnemy();
             time = 0;
         }
     }
 
-    void SpawnEnemy()
+    private void SpawnEnemy()
     {
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         GameObject spawn = Instantiate(enemySpawned, spawnPoint);
+        EnemyScript newEnemy = spawn.GetComponent<EnemyScript>();
+        newEnemy.SetPlayerPos(playerPos);
         spawn.transform.SetParent(null);
     }
 }

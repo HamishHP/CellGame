@@ -5,6 +5,8 @@ public class PlayerCircleController : MonoBehaviour
     public Camera cam;
     public ShootScript shootScript;
 
+    private int health = 3;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -49,5 +51,14 @@ public class PlayerCircleController : MonoBehaviour
 
         // Rotate the character to face the mouse pointer
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
+    public void TakeDamage()
+    {
+        health--;
+        if (health == 0)
+        {
+            Debug.Log("Oops died");
+        }
     }
 }

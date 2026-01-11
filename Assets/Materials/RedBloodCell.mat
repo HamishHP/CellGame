@@ -8,8 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RedBloodCell
-  m_Shader: {fileID: -6465566751694194690, guid: 71d725fff6a90d9438f574ebde451c19,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 034080c8068407845bb1c8a9ae86aff7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -50,7 +49,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FlowMap:
-        m_Texture: {fileID: 2800000, guid: 64d89d79a897af04f81b8f9f509c69ff, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6795ae69169557a4eba8188bd0d61c20, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -58,7 +57,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture2D:
-        m_Texture: {fileID: 2800000, guid: 6fd650055c3ff854993dc77b047d6e88, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3f464a657bf835c4193d833d0026ef32, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
