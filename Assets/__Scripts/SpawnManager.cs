@@ -6,9 +6,14 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemySpawned;
     public Transform[] spawnPoints;
 
-    private float time;
+    private float time = 0;
 
     public Transform playerPos;
+
+    private void Start()
+    {
+        SpawnEnemy();
+    }
 
     // Update is called once per frame
     private void Update()
@@ -26,7 +31,7 @@ public class SpawnManager : MonoBehaviour
     {
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         GameObject spawn = Instantiate(enemySpawned, spawnPoint);
-        EnemyScript newEnemy = spawn.GetComponent<EnemyScript>();
+        SimpleEnemyScript newEnemy = spawn.GetComponent<SimpleEnemyScript>();
         newEnemy.SetPlayerPos(playerPos);
         spawn.transform.SetParent(null);
     }

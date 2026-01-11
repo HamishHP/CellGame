@@ -20,13 +20,13 @@ public class BulletScript : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<EnemyScript>().Die();
+            collision.GetComponent<SimpleEnemyScript>().TakeDamage();
         }
 
-        if (collision.CompareTag("Player"))
+        /*if (collision.CompareTag("Player"))
         {
             collision.GetComponent<PlayerCircleController>().TakeDamage();
-        }
+        }*/
 
         Destroy(gameObject);
     }

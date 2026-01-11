@@ -4,17 +4,32 @@ public class PlayerCircleController : MonoBehaviour
 {
     public Camera cam;
     public ShootScript shootScript;
+    private ScoreHandler scoreHandler;
 
-    private int health = 3;
+    public SpriteRenderer sr;
+    private bool isDead = false;
+
+    public GameObject resetButton;
+
+    //private int health = 3;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        scoreHandler = GetComponent<ScoreHandler>();
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if (isDead)
+        {
+            shootScript.StopShooting();
+            sr.enabled = false;
+            resetButton.SetActive(true);
+            return;
+        }
+
         FaceCursor();
 
         if (Input.GetMouseButtonDown(0))
@@ -53,12 +68,29 @@ public class PlayerCircleController : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    public void TakeDamage()
+    /*public void TakeDamage()
     {
         health--;
         if (health == 0)
         {
             Debug.Log("Oops died");
+        }
+    }*/
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Enemy"))
+        {
+            isDead = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Coin"))
+        {
+            Destroy(collision.gameObject);
+            scoreHandler.IncrementScore();
         }
     }
 }

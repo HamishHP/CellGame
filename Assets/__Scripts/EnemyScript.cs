@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour
     public float idleTimer = 4f;
     public float wanderTimer = 2f;
     public float wanderAimVariance = 20f;
+    public float attackTime = 1f;
 
     public float attackRange = 5f;
     public float shootRange = 7f;
@@ -27,6 +28,7 @@ public class EnemyScript : MonoBehaviour
     private void Start()
     {
         shootScript = GetComponent<ShootScript>();
+        StartCoroutine(DoIdle());
     }
 
     // Update is called once per frame
@@ -43,7 +45,12 @@ public class EnemyScript : MonoBehaviour
         {
             RotateToPlayer();
             shootScript.StartShooting();
-        } // left off here
+        }
+        else if (isAttacking)
+        {
+            StartCoroutine(DoIdle());
+            isAttacking = false;
+        }
     }
 
     private IEnumerator DoIdle()
@@ -62,15 +69,6 @@ public class EnemyScript : MonoBehaviour
         yield return new WaitForSeconds(wanderTimer);
         shootScript.StopShooting();
         StartCoroutine(DoIdle());
-    }
-
-    private IEnumerator DoAttack()
-    {
-        while (Vector2.Distance(transform.position, playerPosition.position) < shootRange)
-        {
-        }
-        shootScript.StopShooting();
-        yield return null;
     }
 
     private void RotateToPlayer()
